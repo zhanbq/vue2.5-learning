@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 通过对象绑定样式 -->
+        <div :style='[styleObj,{fontSize: "20px"}]'
+            @click='handleDivClick'>
+            <!-- 如果是绑定的是数组的形式,样式有数组里面的对象决定 -->
+            hello world
+        </div> 
+
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                styleObj:{
+                    color:"black"
+                }
+            },
+            methods:{
+               
+               handleDivClick:function(){
+                   this.styleObj.color = this.styleObj.color === "black"?"red":"black"
+               }
+               
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

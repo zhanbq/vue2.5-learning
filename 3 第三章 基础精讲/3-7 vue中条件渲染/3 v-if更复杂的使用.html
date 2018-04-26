@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 通过对象绑定样式 -->
+        <div v-if="show">{{message}}</div> 
+        <div v-else>Bye World</div> 
+        <!-- if 和 else 一定要一起使用 如果中间有其他标签,浏览器就会报错 -->
+
+        <!-- 
+            如下使用会报错
+            vue.js:597 [Vue warn]: Error compiling template:
+            ...
+            - v-else used on element <div> without corresponding v-if.
+        -->
+        <div v-if="show">{{message}}</div> 
+        <span></span>
+        <div v-else>Bye World</div> 
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                show:false,
+                message:"hello world"
+            },
+            methods:{
+             
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

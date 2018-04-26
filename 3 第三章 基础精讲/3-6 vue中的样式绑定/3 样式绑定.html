@@ -16,8 +16,8 @@
     <div id="app">
 
         <div @click="handleDivclick"
-             :class="{activated:isActivatied}">
-             <!-- class 的对象绑定 activated 是固定属性 替换a等其属性名则不会生效-->
+             :class="[activated, activatedOne]">
+             <!-- class 的对象绑定 与1中不同的是 [] 是取data中的变量-->
         hello world</div> 
 
     </div>  
@@ -25,11 +25,17 @@
         var vm = new Vue({
             el:"#app",
             data:{
-                isActivatied:false
+                activated:"",
+                activatedOne:"activated-one"
             },
             methods:{
                 handleDivclick:function(){
-                    this.isActivatied = !this.isActivatied
+                    // if(this.activated === "activated"){
+                    //     this.activated = ""
+                    // }else{
+                    //     this.activated = "activated"
+                    // }
+                    this.activated = this.activated === "activated" ? "":"activated"
                 }
             }
         })

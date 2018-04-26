@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="show === 'a'">{{message}}</div>
+        <div v-else-if="show === 'b'">show B</div>
+        <div v-else>show others</div>      
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                show:'a',
+                message:"hello world"
+            },
+            methods:{
+             
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

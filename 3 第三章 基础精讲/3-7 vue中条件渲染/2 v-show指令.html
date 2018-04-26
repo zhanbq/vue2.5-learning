@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 通过对象绑定样式 -->
+        <div v-if="show">{{message}}</div> 
+        <div v-show="show">{{message}}</div>
+        <!-- 
+            v-if 和 v-show 都能够控制一个模板标签是否在页面上显示
+            区别:
+                v-if 为false 是 其对应的div就不存在与dom只上,也就是说页面不对有该div
+                v-show 为false 实际上 这个标签依然存在,只不过其display:none,也就是说这个dom被隐藏了
+
+                v-show 由于不会频繁的把一个dom从页面上删除在添加,所以性能会更高
+        -->
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                show:false,
+                message:"hello world"
+            },
+            methods:{
+             
+            }
+        })
+        
+    </script>
+</body>
+
+</html>
