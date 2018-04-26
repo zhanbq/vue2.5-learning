@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hrllo world</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text">
+        <button>提交</button>
+        <ul>
+            <li>第一课的内容</li>
+            <li>第二课的内容</li>
+        </ul>
+    </div>
+    <script>
+
+        // vue的方式
+        var app = new Vue({
+            el: '#app', // el 代表管理的vue实例负责管理的区域
+            data:{
+                list: ['第一课的内容','第二课的内容']
+            }
+        })
+       
+    </script>
+</body>
+
+</html>

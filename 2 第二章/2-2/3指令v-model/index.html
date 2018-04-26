@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <button v-on:click="handleBtnClick">提交</button>
+        <ul>
+            <li v-for="item in list">{{item}}</li>
+            <!-- list 不是固定变量 你可以写成 a 或者 xx -->
+        </ul>
+    </div>
+    <script>
+
+        // vue的方式
+        var app = new Vue({
+            el: '#app', // el 代表管理的vue实例负责管理的区域
+            data:{
+                list: [],
+                /**
+                当input中的value发生变化的时候,
+                inputValue的值就会发生变化,
+                同样,当inputValue发生变化的时候,input输入框内的值也会发生变化
+                这就是双向绑定
+                浏览器验证: console中输入:
+                app.$data.inputValue
+                或
+                app.$data.inputValue = "something"
+                **/
+                inputValue:'' 
+            },
+            methods:{
+                handleBtnClick: function(){
+                    this.list.push(this.inputValue)
+                    //清空input
+                    this.inputValue = ''
+                }
+            }
+        })
+       
+    </script>
+</body>
+
+</html>

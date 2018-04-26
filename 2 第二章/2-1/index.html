@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hrllo world</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="app">{{content}}</div>
+    <script>
+        //传统方式
+        // var dom = document.getElementById("app");
+        // dom.innerHTML = 'hello world';
+
+        // 每隔两秒修改 content中的内容
+        // setTimeout(() => {
+        //   dom.innerHTML = 'bye world'  
+        // }, 2000);
+
+
+        // vue的方式
+        var app = new Vue({
+            el: '#app', // el 代表管理的vue实例负责管理的区域
+            data:{
+                content: 'hello word'
+            }
+        })
+        setTimeout(function(){
+            app.$data.content = 'bye world'
+        },2000)
+    </script>
+</body>
+
+</html>

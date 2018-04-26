@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        
+        <!-- 插值表达式  实际上作用和 v-text的作用是一样的 -->
+        <div>{{name}}</div>
+
+        <!-- 插值表达式同样 支持字符串的拼接 -->
+        <div>{{name2 + ' Lee'}}</div>
+
+        <!-- v-text指令表示获取 vm 对象中data中 属性名为name的值 -->
+        <div v-text="name"></div>
+        
+        <!-- 字符串的拼接 -->
+        <div v-text="name2 + ' Lee'"></div>
+
+        <!-- v-text指令表示获取 vm 对象中data中 属性名为name的值 -->
+        <div v-html="name"></div>
+        
+        <!-- v-html中 字符串的拼接 -->
+        <div v-html="name2 + ' Lee'"></div>
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                name:"<h1>Dell</h1>",
+                name2:"Dell2"
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

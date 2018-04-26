@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hrllo world</title>
+    <script src="./vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <div @click="handleClick">{{message}}</div>
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#root", //vue 实例接管了id=root的dom
+            data:{
+                message:'hello word'
+            },
+            methods:{
+                handleClick : function(){
+                    alert('hello')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
