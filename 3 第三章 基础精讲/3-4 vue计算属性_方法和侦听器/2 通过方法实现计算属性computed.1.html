@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{firstName + " " + lastName}}</div>
+        
+    <!-- 
+        调用methods中的fullName函数 此种计算方式不如computed属性去计算
+        此种方式的计算结果不会被缓存,对性能没有提升,
+        测试:
+        在控制台 使用vm.age=22 测试,在没有改变firstName 和 lastName的情况下,
+        fullName()函数 依然被重新调用,并计算了一次,控制台也会答应log
+        所以在实现相同的计算功能时,带有缓存机制的computed性能更好
+    -->
+        <div>{{fullName()}}</div> 
+        
+        <div>{{age}}</div>
+
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                firstName:"Dell",
+                lastName:"Lee",
+                age: 28
+            },
+            methods:{
+                fullName:function(){
+                    console.log("计算了一次")
+                    return this.firstName + " " + this.lastName
+                }
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

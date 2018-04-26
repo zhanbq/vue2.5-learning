@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{firstName + " " + lastName}}</div>
+        <div>{{fullName}}</div>
+        
+        <div>{{age}}</div>
+
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                firstName:"Dell",
+                lastName:"Lee",
+                age: 28
+            },
+            // vue 计算属性 计算属性是内置缓存的,
+            //如果firstName 和 lastName 的值 没有发生改变,
+            //函数就不会被再次执行, 就不会再次打印log中的内容
+            //可以在控制台 使用 vm.age = 22 测试 log并没有被打印
+            // 如果使用 vm.fistName = 'Wang'测试 log会被打印 缓存被刷新
+            computed:{
+                fullName: function(){
+                    console.log("计算了一次")
+                    return this.firstName + " " + this.lastName
+                }       
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

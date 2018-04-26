@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div>{{firstName + " " + lastName}}</div>
+    
+        <div>{{fullName}}</div> 
+        
+        <div>{{age}}</div>
+
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                firstName:"Dell",
+                lastName:"Lee",
+                fullName:"Dell Lee",
+                age: 28
+            },
+            //声明监听器
+            watch:{
+                //监听firstName属性的改变
+                firstName:function(){
+                    console.log("计算了一次")
+                    this.fullName = this.firstName + " " + this.lastName
+                },
+                // 监听lastName属性的改变
+                lastName:function(){
+                    console.log("计算了一次")
+                    this.fullName = this.firstName + " " + this.lastName
+                }
+
+            }
+        })
+        
+    </script>
+</body>
+
+</html>

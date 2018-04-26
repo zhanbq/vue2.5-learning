@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+
+        <div>{{fullName}}</div> 
+        
+        <div>{{age}}</div>
+
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                firstName:"Dell",
+                lastName:"Lee",
+                age: 28
+            },
+            // computed:{
+            //     fullName: function(){
+            //         console.log("计算了一次")
+            //         return this.firstName + " " + this.lastName
+            //     }       
+            // }
+            computed:{
+                fullName: {
+                    get:function(){ //此种方式与上面注释代码作用一样
+                        console.log("计算了一次")
+                        return this.firstName + " " + this.lastName
+                    },
+                    /**
+                     * 对fullName的赋值会被打印
+                     * 在页面控制台中 vm.fullName= 'wang lao 2',会打印log了 
+                     * 证明函数被调用成功
+                     * */
+                    set:function(val){ 
+                        console.log(val)
+                    }
+                }       
+            }
+        })
+        
+    </script>
+</body>
+
+</html>
