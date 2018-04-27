@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div v-for="item of list">
+            {{item}}
+        </div>
+        <hr>
+        <!-- index 下标 
+            一般来说 为了提升循环显示的性能
+            会为每个循环项加上一个唯一的key值
+            不建议使用index作为key值,index的频繁使用会降低性能
+            一般实用查询后端返回所带的id 例如商品列表里的商品类别id
+        -->
+        <div v-for="(item, index) of list" :key="index"  >
+            {{item}} --- {{index}}
+        </div>
+        <hr>
+        <div v-for="(item, index) of list" :key="item.id"  >
+                {{item.text}} --- {{item.id}}
+        </div>
+    </div>
+
+    <script>
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    {
+                        id:"010120201",
+                        text:"hello"
+                    },{
+                        id:"010120202",
+                        text:"Dell"
+                    }
+                ]
+            }
+        })
+
+    </script>
+</body>
+
+</html>

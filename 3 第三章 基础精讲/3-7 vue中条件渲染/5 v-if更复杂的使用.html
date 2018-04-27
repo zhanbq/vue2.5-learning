@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <script src="../../vue.js"></script>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="show">
+            用户名:<input type="text">
+        </div>
+        <div v-else>
+            邮箱名:<input type="text">
+        </div>
+        <!-- 页面中默认显示邮箱名, 在输入框中中输入测试邮箱账号,例如"123@qq.com"
+            然后测试: 在控制台输入 vm.show = true 变为[用户名],
+            但是输入框中的邮箱账号 并没有发生改变 
+            原因是,vue在重新渲染也面时,会尝试去复用页面上已经存在的dom,
+            当显示[邮箱名]的时候已经有了一个input标签,
+            当切换展示[用户名]的时候,vue会发现以前页面上已经有了一个input了,
+            vue就回去尝试复用这个input
+            但是复用以后,并没有帮助我们清空这个input
+            于是我们可以采用 key值的方式 来处理这个问题 如下
+        -->
+        <hr>
+        <div v-if="show">
+                用户名:<input type="text" key="username">
+        </div>
+        <div v-else>
+            邮箱名:<input type="text" key="password">
+        </div>
+        <!-- 
+            加入key值属性后,当show的值发生改变,就会自动清空input了,
+            当给页面上某个标签加上key值后,vue就会认为这是页面上唯一的元素,
+            如果两个相同标签的key值不同,vue就不会去尝试复用该标签了
+         -->
+    </div>  
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                show:false,
+                message:"hello world"
+            },
+            methods:{
+             
+            }
+        })
+        
+    </script>
+</body>
+
+</html>
