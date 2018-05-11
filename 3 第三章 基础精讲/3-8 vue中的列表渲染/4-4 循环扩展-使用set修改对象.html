@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h2>对象循环</h2>
+    <div id="app">
+            <!-- 
+                item:属性值
+                key:属性名
+                index :索引
+             -->
+           <div v-for="(item, key, index) of userInfo">
+                key : {{key}} --- value : {{item}} --- index : {{index}}
+           </div>
+    </div>
+
+    <script>
+       
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                userInfo:{
+                    name:"Dell",
+                    age:28,
+                    gender:"male",
+                    salary:"secret"
+                }
+            }
+        })
+
+        /**
+            ===========================================
+            修改对象的属性
+            vm.userInfo.name = 'tom'
+            这样修改 就可以直接通过改变对象使页面也跟着变化
+            ===========================================
+            增加对象的属性,
+            在控制台测试:vm.userInfo.address = 'beijing'
+            没有报错,并返回了新增属性的值.但是页面没有变化.
+            类似数组,可以使用修改引用的方式.直接赋值一个新的对象就可以了
+            动态的修改对象的值,并使页面的数据也随之变化.
+            vm.userInfo = {
+                    name:"Dell",
+                    age:28,
+                    gender:"male",
+                    salary:"secret",
+                    address:"beijing"
+                }
+            这样改变数据,页面就会随着一起变化
+
+            另一种方式:Vue.set()
+            Vue.set(vm.userInfo, "address", "beijing")
+            在控制台测试,页面会多出一个address
+
+            通过实例方法中的set改变对象的值,等同于Vue.set()
+            vm.$set(vm.userInfo,"address","nanjing")
+            此方法也可实现同样的效果
+            =============================================
+
+        */
+    </script>
+    
+</body>
+
+</html>

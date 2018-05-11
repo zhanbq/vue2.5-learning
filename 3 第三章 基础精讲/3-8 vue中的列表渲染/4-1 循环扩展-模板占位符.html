@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+            <h2>使用普通写法:</h2>
+        <!-- 
+            这样的写法会使循环用的div也渲染
+            如果遇到不想渲染这个div的时候,
+            就需要用到模板占位符
+            
+        -->
+        <div v-for="(item, index) of list" :key="item.id">
+            <div>
+                {{item.text}} --- {{item.id}}
+            </div>
+            <div>
+                {{item.text}}
+            </div>
+        </div>
+        <hr>
+        <h2>使用占位符:</h2>
+        <!-- 
+            使用模板占位符
+            使用这样的写法之后,再回到页面template标签并不会被渲染出来
+         -->
+        <template v-for="(item, index) of list">
+                <div>
+                        {{item.text}} --- {{item.id}}
+                    </div>
+                    <div>
+                        {{item.text}}
+                    </div>
+        </template>
+    </div>
+
+    <script>
+        // vue数组变异方法 改变数组内容可以通过改变引用
+        //,即赋值一个新的数组 可以通过vm.list = [{...}]
+        //在控制台测试
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    {
+                        id: "010120201",
+                        text: "hello"
+                    }, {
+                        id: "010120202",
+                        text: "Dell"
+                    }
+                ]
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

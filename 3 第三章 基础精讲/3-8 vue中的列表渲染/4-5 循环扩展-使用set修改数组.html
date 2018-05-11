@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h2>对象循环</h2>
+    <div id="app">
+            <!-- 
+                item:属性值
+                key:属性名
+                index :索引
+             -->
+           <div v-for="(item, index) of userInfo">
+                index : {{index}} --- value : {{item}}
+           </div>
+    </div>
+
+    <script>
+       
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                userInfo:[
+                    1,2,3,4
+                ]
+            }
+        })
+
+        /**
+            ===========================================
+            使用set修改数组
+            参数1: 要修改的目标数组
+            参数2: 要修改的元素的下标索引
+            参数3: 要修改的值
+            Vue.set(vm.userInfo,1,5)
+            =============================================
+
+        */
+    </script>
+    
+</body>
+
+</html>

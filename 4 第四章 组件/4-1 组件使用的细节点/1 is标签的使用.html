@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h3>使用is标签解决标签渲染时可能出现的小bug</h3>
+    <div id="root">
+        <h4>传统写法</h4>
+        <table>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <h4>指定全局组件的方式</h4>
+        <p>
+            <h6>
+                定义好全局组件,并使用,发现页面并没有渲染出数据来, 
+                却将不带有内容的row标签渲染出来了,这显然个bug 
+                所以,需要创建vue实例,去接管这个区域的dom对象.
+            </h6>
+            <h6>
+                但是,再次刷新页面,又出现了新的问题. 
+                使用模板定义的 "&lttr&gt&lttd&gtthis a row&lt/tr&gt&lt/td&gt" 竟然渲染成和"table"标签同级
+            </h6>
+            <h6>
+                原因是,在h5的规范里面,要求我们 
+                table里面有tbody, 
+                tbody里面必须要放tr, 
+                而现在我们使用子组件,在tbady里面定义成了row, 
+                所以浏览器解析row的时候就会出问题
+            </h6>
+        </p>
+        <table>
+            <tbody>
+                <row></row>
+                <row></row>
+                <row></row>
+            </tbody>
+        </table>
+        <hr>
+        <p>
+            <h4>解决方案</h4>
+            <h6>
+                在tbody使用组件,但是不能直接用,首先要遵循h5的规范. 
+                使用is指令,指定这个tr是一个组件, 
+                如此一来就保证了 
+                tr里面显示的是我们定义的组件,
+                又保证了遵循h5的规范. 
+                从而解决的bug.
+            </h6>
+        </p>
+        <table>
+            <tbody>
+                <tr is="row">
+                    <td>1</td>
+                </tr>
+                <tr is="row">
+                    <td>2</td>
+                </tr>
+                <tr is="row">
+                    <td>3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        Vue.component("row", {
+            template: '<tr><td>this a row</tr></td>'
+        })
+
+
+        // vue的方式
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+
+</html>

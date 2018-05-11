@@ -24,7 +24,8 @@
         </div>
         <hr>
         <div v-for="(item, index) of list" :key="item.id"  >
-                {{item.text}} --- {{item.id}}
+                text: {{item.text}} --- id : {{item.id}}
+            </div>
         </div>
     </div>
 
@@ -33,6 +34,7 @@
         var vm = new Vue({
             el: "#app",
             data: {
+                // list 模拟后端返回前端的数据
                 list: [
                     {
                         id:"010120201",
