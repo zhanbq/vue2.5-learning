@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h3>使用is标签解决标签渲染时可能出现的小bug - 2</h3>
+    <div id="root">
+        <p>
+            <h4>解决方案</h4>
+            <h6>
+            </h6>
+        </p>
+        <table>
+            <tbody>
+                <tr is="row">
+                </tr>
+                <tr is="row">
+                </tr>
+                <tr is="row">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        /**
+        Vue.component("row", {
+            data:{
+                content:"this is a row"
+            },
+            template: '<tr><td>{{content}}</tr></td>'
+        })
+        这样的写法会报错,如下:
+        vue.js:597 [Vue warn]: The "data" option should be a function that returns a per-instance value in component definitions.
+        如果实在Vue对象中定义data是没问题的,
+        但是现在在组件中定义data 是不可以的
+        在组件中,data的定义要求使用一个函数来完成,
+        并要求这个data函数返回一个对象
+        data: function(){
+            return{
+                content:"this is my content"
+            }
+        }
+        实例如下
+        */
+       //这样的写法,才能将数据正确渲染
+       /**
+        * 之所以这样设计,是因为子组件不像根组件只会被调用一次,
+        * 本页实例中就被调用了三次,
+        * 大多数场景中,对于每一个子组件我们希望它有自己的数据.
+        * 例如 三个 row组件中, 每个 row 都应该有一套自己的数据,而不是
+        * 共享一套数据.通过函数来返回对象的目的,就是让每一个子组件都有一个
+        * 独立的数据存储.如此使用定义函数的形式定义data,这样就避免了
+        * 多个子组件之间互相影响的情况.
+        */
+        Vue.component("row", {
+            data:function(){
+                return {
+                    content:"this is my content"
+                }
+            },
+            template: '<tr><td>{{content}}</tr></td>'
+        })
+        // vue的方式
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+
+</html>

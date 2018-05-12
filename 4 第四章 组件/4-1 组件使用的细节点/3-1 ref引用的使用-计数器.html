@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h3>ref引用的使用</h3>
+    <p>
+        <h6>
+            vue不建议在代码中操作dom,但是在处理一些极其复杂的动画效果时,
+            不操作dom,只靠vue的数据绑定有的时候处理不了这样的情况.
+        </h6>
+        <h6>
+            所以在某些必要的情况下,就必须要操作dom了
+            那么在vue中如何操作dom呢
+        </h6>
+        <h6>
+            使用ref引用的形式
+            实例如下:
+            完成点击div,显示div中的内容
+            这样的需求
+        </h6>
+        <h6>
+                .$refs指的是整个vue实例里面,所有的引用
+        </h6>
+        <h6>
+                this.$refs.hello 所有的引用中找到自己定义的 名为 hello 的引用
+                ,来获取dom
+        </h6>
+        <h6>
+             如果ref定义在html标签可以获取dmo
+             如果ref到定义在组件上,实际上获取的是组件的引用
+        </h6>
+    </p>
+    <div id="root">
+        click these numbers
+       <counter ref="one" @change="handChange"></counter>
+       <counter ref="two" @change="handChange"></counter>
+       求和
+       <div>{{total}}</div>
+    </div>
+    <script>
+        Vue.component("counter",{
+            template:"<div @click='handleClick'>{{number}}</div>",
+            data: function(){
+                return {
+                    number: 0
+                }
+            },
+            methods:{
+                handleClick:function(){
+                    this.number ++
+                    /**
+                     * 子组件向父组件传值,
+                     * 当子组件被点击,将数字+1后,
+                     * 同时触发 定义好的 'change' 事件.
+                     * 在外部 就可以使用@change 来监听事件了.
+                     * 外部就可以为change 绑定一个handleChange方法
+                     * 然后在父组件中就可以定义一个 handleChange方法了
+                     */ 
+                    this.$emit("change") 
+                                        
+                }
+            }
+        })
+        var vm = new Vue({
+            el:"#root",
+            data:{
+                total:0
+            },
+            methods:{
+                handChange:function(){
+                    console.log('change')
+                    console.log(this.$refs.one)
+                    console.log(this.$refs.two)
+                    this.total = this.$refs.one.number + this.$refs.two.number
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
