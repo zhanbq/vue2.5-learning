@@ -36,9 +36,9 @@
         })
         这样的写法会报错,如下:
         vue.js:597 [Vue warn]: The "data" option should be a function that returns a per-instance value in component definitions.
-        如果实在Vue对象中定义data是没问题的,
-        但是现在在组件中定义data 是不可以的
-        在组件中,data的定义要求使用一个函数来完成,
+        如果是在根组件Vue对象中定义data是没问题的,
+        但是现在在子组件中定义data 是不可以的
+        在子组件中,data的定义要求使用一个函数来完成,
         并要求这个data函数返回一个对象
         data: function(){
             return{
