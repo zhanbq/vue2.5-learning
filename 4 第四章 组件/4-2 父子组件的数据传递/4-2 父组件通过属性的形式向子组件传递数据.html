@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h3>父子组件传值</h3>
+    <p>
+        
+    </p>
+    <div id="root">
+        <!-- 
+            count 传递的是字符串
+            :count 传递的是数字 : 标后 后面指定的是js表达式
+         -->
+        <counter count="0"></counter>
+        <counter :count="1"></counter>
+    </div>
+    <script>
+        var counter = {
+            props:['count'],//接收父组件以:count和count指定的数据,在子组件中使用
+            template:'<div>{{count}}</div>'
+        }
+        var vm = new Vue({
+            el:"#root",
+            components:{
+                counter:counter
+            }
+        })
+    </script>
+</body>
+
+</html>

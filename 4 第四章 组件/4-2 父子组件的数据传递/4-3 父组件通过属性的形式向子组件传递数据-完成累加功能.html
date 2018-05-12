@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h3>父子组件传值</h3>
+    <p>
+        
+    </p>
+    <div id="root">
+        <!-- 
+            count 传递的是字符串
+            :count 传递的是数字 : 标后 后面指定的是js表达式
+         -->
+        <counter count="0"></counter>
+        <counter :count="1"></counter>
+    </div>
+    <script>
+        var counter = {
+            props:['count'],//接收父组件以[:count]和[count]指定的数据,在子组件中使用
+            data:function(){
+                return {
+                    number : this.count
+                }
+            },
+            // template:'<div @click="handleClick">{{count}}</div>',
+            template:'<div @click="handleClick">{{number}}</div>',
+            methods:{
+                handleClick:function(){
+                    /**
+                     * 这样的写法可以完成累加,但是控制台会报错
+                     * 原因是 vue中定义了单向数据流的概念,
+                     * 也就是父组件通过属性的形式可以向子组件传递数据,
+                     * 但是子组件不能反过来修改父组件传过来的参数.
+                     * 因为多数情况下,还有其他子组件同时使用了这个父组件传的值.
+                     * 解决办法:自己定义一个新的属性 如上面的data
+                     * 那么 模板中的插值表达式里面取的就应该是新定义的number属性了
+                     */ 
+                    // this.count++ 
+                    this.number ++ 
+                }
+            }
+        }
+        var vm = new Vue({
+            el:"#root",
+            components:{
+                counter:counter
+            }
+        })
+    </script>
+</body>
+
+</html>

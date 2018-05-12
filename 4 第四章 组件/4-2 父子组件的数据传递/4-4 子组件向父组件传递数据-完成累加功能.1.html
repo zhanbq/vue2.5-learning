@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hello world</title>
+    <script src="../../vue.js"></script>
+</head>
+
+<body>
+    <h3>父子组件传值</h3>
+    <p>
+        
+    </p>
+    <div id="root">
+        <counter count="0" @inc="handleIncrease"></counter>
+        <counter :count="1" @inc="handleIncrease"></counter>
+        <div>求和: {{total}}</div>
+    </div>
+    <script>
+        var counter = {
+            props:['count'],//接收父组件以[:count]和[count]指定的数据,在子组件中使用
+            data:function(){
+                return {
+                    number : this.count
+                }
+            },
+            template:'<div @click="handleClick">{{number}}</div>',
+            methods:{
+                handleClick:function(){
+                    
+                    this.number ++ 
+                    this.$emit('inc',1) //p1:注册事件; p2:值增加1
+                }
+            }
+        }
+        //父组件是vue的根实例,里面的data就需要使用函数了
+        var vm = new Vue({
+            el:"#root",
+            data:{
+                total:1
+            },
+            components:{
+                counter:counter
+            },
+            methods:{
+                //step 步长
+                handleIncrease:function(step){
+                    console.log('click inc step: ' + step)
+                    this.total += step
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
