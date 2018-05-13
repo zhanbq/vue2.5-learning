@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中的插槽(slot)</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>
+        <h4>
+            插槽的使用场景
+        </h4>
+        <h6>
+            子组件中除了展示p标签之外,还要展示一段内容(带有html标签)
+            新加的这段内容并不是由子组件决定,而是由父组件传递过来的
+        </h6>
+    </p>
+    <div id="root">
+        <h4>错误的渲染</h4>
+        <child content='<p>dell</p>'></child>
+
+        <h4>正确的渲染</h4>
+        <right-child content='<p>dell</p>'></right-child>
+    </div>
+    <script>
+        Vue.component('child',{
+            props:['content'],
+            template:'<div><p>hello</p>{{content}}</div>'
+        })
+
+        Vue.component('right-child',{
+            props:['content'],
+            template: `<div>
+                        <p>
+                            hello
+                            <div v-html="content">
+                            </div>
+                        </p>
+                      </div>`
+        })
+
+        var vm = new Vue({
+            el:"#root"
+        })
+    </script>
+</body>
+</html>

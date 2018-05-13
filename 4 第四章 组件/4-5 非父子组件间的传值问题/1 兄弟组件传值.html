@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>非父子组件间传值(Bus/总线/发布订阅模式/观察者模式)</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <p>
+            <h4>
+                需求:
+                点击dell变成lee
+                点击lee变成dell
+            </h4>
+        </p>
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+    <script>
+        /**
+         * 在vue的prototype上挂载bus属性
+         * 这个属性指向vue的实例,
+         * 之后只要创建vue对象或组件,每一个组件上都会有bus这个属性
+         * 因为每一个组件或vue实例都是通过,Vue这个类来创建的
+         * 而我们在Vue的类的prototype上挂了一个bug的属性,
+         * 所以每一个通过VUe创建的对象,都会有bus这个属性,
+         * 都指向同一个vue的实例.
+         * 后面的部分会详细讲解new Vue()的意义
+         */ 
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child',{
+            data:function(){
+                return {
+                    selfContent: this.content //避免直接修改父组件的content属性
+                }
+            },
+            props:{
+                content:{
+                    type:String
+                }
+            },
+            template:"<div @click='handleClick'>{{selfContent}}</div>",
+            methods:{
+                handleClick:function(){
+                    console.log("child : "+this.selfContent)
+                    this.bus.$emit('change',this.selfContent)
+                }
+            },
+            //生命周期组件 之前讲过
+            mounted:function(){
+                //监听change事件
+                //测试时,会发现这里 alert了两次
+                //是因为两个child组件都对同一个change事件进行了监听
+                
+                var this_ = this //这里保存下面function中失效的作用域
+                
+                this_.bus.$on('change', function(msg){
+                    // alert(msg)
+                    // this.content = msg //在这个函数中this的作用域发生了变化
+                    this_.selfContent = msg
+                })
+            }
+        })
+
+        var vm = new Vue({
+            el:"#root"
+        })
+    </script>
+</body>
+</html>

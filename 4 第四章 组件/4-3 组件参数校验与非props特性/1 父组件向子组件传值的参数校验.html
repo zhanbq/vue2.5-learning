@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验与非props特性</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <child :content="1"></child>
+    </div>
+    <script>
+        Vue.component('child',{
+            props:{
+                // content:String //参数校验:子组件接受到的content必须是字符串类型的
+                //参数校验失败的错误:[Vue warn]: Invalid prop: type check failed for prop "content". Expected String, got Number.
+                content:Number
+                // content:[Number,String] 要么是数字 要么是字符串,传对象就会报错了
+            },
+            template:'<div>{{content}}</div>'
+        })
+        var vm = new Vue({
+            el:"#root"
+        })
+    </script>
+</body>
+</html>

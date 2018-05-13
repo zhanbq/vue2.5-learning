@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>子组件触发父组件注册的事件</p>
+    <div id="root">
+        <!-- 
+            .native 事件修饰符,就是这么简单
+            这个时候监听的已经不是内部组件向外触发的自定义事件
+            而是监听 原生的点击时间
+         -->
+        <child @click.native="handleClick"></child>
+    </div>
+    <script>
+        Vue.component('child',{
+            // 给组件定义的div元素 绑定事件
+            template:'<div>Child</div>',
+            methods:{
+                handleChildClick:function(){
+                    console.log('child click')
+                }
+            }
+        })
+        var vm = new Vue({
+            el:"#root",
+            methods:{
+                handleClick:function(){
+                    console.log('click')
+                }
+            }
+        })
+
+        /**
+         * 整个逻辑:
+         * 首先点击clickdiv元素时,
+         * 子组件监听到自身的div元素被点击,
+         * 然后向外触发一个自定义事件,
+         * 父组件监听了click自定义事件,
+         * 父组件中定义的handleClick就会被执行
+         * 这样写很麻烦,
+         */
+    </script>
+</body>
+</html>
