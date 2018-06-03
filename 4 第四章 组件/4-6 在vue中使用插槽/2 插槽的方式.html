@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中的插槽(slot)</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>
+        <h4>
+            插槽的使用场景
+        </h4>
+    </p>
+    <div id="root">
+        <hr>
+        <p><h3>插槽有内容</h3></p>
+        <child>
+            <!-- 在子组件中 插入标签 -->
+            <p>
+                <h1>Dell</h1>
+            </p>
+        </child>
+        <hr>
+        <p><h3>插槽无内容,显示预先定义的默认值</h3></p>
+        <child>
+               
+        </child>
+    </div>
+    <script>
+        Vue.component('child',{
+            template:`<div>
+                        <p>hello</p>
+                        <slot>默认内容</slot>
+                      </div>`
+                      //slot标签 用来接收插入子组件中标签 非常方便
+                      //slot 还可以声明 默认的内容,如果父组件使用子组件时,
+                      //不传递插槽的内容,就会显示默认值
+        })
+
+        var vm = new Vue({
+            el:"#root"
+        })
+    </script>
+</body>
+</html>

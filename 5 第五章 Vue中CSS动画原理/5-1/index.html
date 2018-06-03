@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>
+        实现渐隐渐现的动画效果
+    </p>
+    <div id="root">
+        <!-- 
+            声明transition标签,期包裹的内容会带有过度的动画效果
+         -->
+        <transition name='fade'>
+            <div v-if="show">
+                hello world
+            </div>
+        </transition>
+        <button @click="handeClick">切换</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#root",
+            data:{
+                show: true
+            },
+            methods: {
+                handeClick:function(){
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+</html>

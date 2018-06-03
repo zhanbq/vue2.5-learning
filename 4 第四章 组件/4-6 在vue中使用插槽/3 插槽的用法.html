@@ -16,27 +16,23 @@
         </h6>
     </p>
     <div id="root">
-        <h4>错误的渲染</h4>
-        <child content='<p>dell</p>'></child>
-
-        <h4>正确的渲染</h4>
-        <right-child content='<p>dell</p>'></right-child>
+        <h4>插槽</h4>
+        <hr>
+        <body-content>
+            <div class="header" slot="header">header</div>
+            <div class="footer" slot="footer">footer</div>
+        </body-content>
+        
     </div>
     <script>
-        Vue.component('child',{
-            props:['content'],
-            template:'<div><p>hello</p>{{content}}</div>'
-        })
-
-        Vue.component('right-child',{
-            props:['content'],
-            template: `<div>
-                        <p>
-                            hello
-                            <div v-html="content">
-                            </div>
-                        </p>
+        Vue.component('body-content',{
+            template:`<div>
+                        <slot name='header'><h1>default header</h1></slot>
+                        <div class='content'>content</div>
+                        <slot name='footer'></slot>
                       </div>`
+                      //接收多个内容,但是位置不同 可以指定slot名 这就是具名插槽
+                      //插槽中 指定默认值 也可以嵌套标签使用
         })
 
         var vm = new Vue({

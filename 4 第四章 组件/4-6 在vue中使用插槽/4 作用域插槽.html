@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue中的插槽(slot)</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>
+        <h4>
+            插槽的使用场景
+        </h4>
+        <h6>
+           作用域插槽:循环显示列表
+        </h6>
+    </p>
+    <div id="root">
+        <h4>插槽</h4>
+        <hr>
+        <child>
+            <!-- 固定写法 -->
+            <!-- 父组件调用子组件的时候,给子组件传了一个插槽
+                作用域插槽必须是一个 template标签 开头和结尾
+                插槽通过slot-scope 声明 子组件的数据 渲染位置
+                
+                作用域插槽使用场景:
+                所以当子组件做循环操作,或者dom结构应该有外部传递
+                近来的时候
+            -->
+            <template slot-scope="props">
+                <li>{{props.item}} - 123</li>
+            </template>
+        </child> 
+        
+    </div>
+    <script>
+        Vue.component('child',{
+
+            data:function(){
+                return {
+                    list:[1,2,3,4]
+                }
+            },
+            //:item=item  声明向父组件传递的数据
+            template:`<div>
+                        <ul>
+                            <slot
+                                v-for="item of list"
+                                :item=item 
+                            >
+                            </slot>
+                        </ul>
+                      </div>`
+        })
+
+        var vm = new Vue({
+            el:"#root"
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>
+        需求: 点击change按钮,child-one和child-two交替显示
+    </p>
+    <div id="root">
+        <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two>
+        <button @click="handleBtnClick">change</button>
+    </div>
+    <script>
+        Vue.component('child-one',{
+            //<component :is="type"></component> 切换组件场景时,
+            //频繁的创建和销毁相同的两个组件,对性能有一定的影响
+            // 声明v-once之后,第一次渲染组件之后就会被保存在内存中,
+            // 等下一次在切换时,就不需要重新创建一个新的组件了,直接从内存中
+            //取出之前缓存好的组件即可. 通过v-once 可以提高一些静态内容的渲染的效率
+            template:'<div v-once>child-one</div>'
+        })
+        
+        Vue.component('child-two',{
+            template:'<div>child-two</div>'
+        })
+
+        var vm = new Vue({
+            el:"#root",
+            data:{
+                type:'child-one'
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.type = this.type === 'child-one' ? 'child-two': 'child-one'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

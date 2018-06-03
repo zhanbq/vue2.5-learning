@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <p>
+        需求: 点击change按钮,child-one和child-two交替显示
+    </p>
+    <div id="root">
+        <!-- <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two>
+        -->
+        <button @click="handleBtnClick">change</button> 
+        <component :is="type"></component>
+        <!-- component 是vue的原生组件,并非自己声明,
+            他会根据is 声明的变量 的 变化, 自动的加载不同的组件
+            并销毁之前的组件.
+        -->
+    </div>
+    <script>
+        Vue.component('child-one',{
+            template:'<div>child-one</div>'
+        })
+        
+        Vue.component('child-two',{
+            template:'<div>child-two</div>'
+        })
+
+        var vm = new Vue({
+            el:"#root",
+            data:{
+                type:'child-one'
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.type = this.type === 'child-one' ? 'child-two': 'child-one'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
