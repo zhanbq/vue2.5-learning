@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue中同时使用过渡和动画</title>
+    <script src="../../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../animate.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <p>
+        使在页面初始化时,元素也具备动画效果
+    </p>
+    <div id="root">
+        <!-- 
+            声明transition标签,期包裹的内容会带有过度的动画效果
+
+            注意:
+                1 vue与animate结合使用时,必须使用自定义声明类这种形式
+                2 自定义中的class 必须要包含 animated 的类
+         -->
+         <!-- Vue中同时使用过渡和动画 : 
+            appear 声明页面加载时有动画效果
+            appear-active-class="animated swing" 动画效果是...  
+        -->
+        <transition name="fade" 
+            appear
+            enter-active-class="animated swing"
+            leave-active-class="animated shake"
+            appear-active-class="animated swing" 
+        >   
+            <div v-show="show">
+                hello world
+            </div>
+        </transition>
+        <button @click="handeClick">切换</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                show: true
+            },
+            methods: {
+                handeClick: function () {
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

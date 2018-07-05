@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script src="../../vue.js"></script>
+    <style>
+        .v-enter {
+            opacity: 0;
+        }
+        .v-enter-active{
+            transition: opacity 3s;
+        }
+
+        .v-leave-to{
+            opacity: 0;
+        }
+        
+        .v-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
 </head>
 <body>
     <p>
@@ -13,7 +29,7 @@
         <!-- 
             声明transition标签,期包裹的内容会带有过度的动画效果
          -->
-        <transition name='fade'>
+        <transition>
             <div v-if="show">
                 hello world
             </div>

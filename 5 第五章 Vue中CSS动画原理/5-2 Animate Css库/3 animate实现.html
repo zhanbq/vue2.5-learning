@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>另一种声明方式</title>
+    <script src="../../vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../animate.css">
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <p>
+        实现渐隐渐现的动画效果
+    </p>
+    <div id="root">
+        <!-- 
+            声明transition标签,期包裹的内容会带有过度的动画效果
+
+            注意:
+                1 vue与animate结合使用时,必须使用自定义声明类这种形式
+                2 自定义中的class 必须要包含 animated 的类
+         -->
+        <transition name="fade" 
+            enter-active-class="animated swing"
+            leave-active-class="animated shake"    
+        >
+            <div v-show="show">
+                hello world
+            </div>
+        </transition>
+        <button @click="handeClick">切换</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                show: true
+            },
+            methods: {
+                handeClick: function () {
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
