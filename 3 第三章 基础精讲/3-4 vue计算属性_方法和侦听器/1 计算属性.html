@@ -13,7 +13,7 @@
         <div>{{fullName}}</div>
         
         <div>{{age}}</div>
-
+        <div>{{person.sex}}</div>
     </div>  
     <script>
         var vm = new Vue({
@@ -21,8 +21,17 @@
             data:{
                 firstName:"Dell",
                 lastName:"Lee",
-                age: 28
+                age: 28,
+                person:{
+                    sex:1
+                }
             },
+//            methods:{
+//              fullName:function () {
+//                  console.log("methods 计算了一次");
+//                  return this.firstName + " " + this.lastName''
+//              }
+//            },
             //computed: vue 计算属性 计算属性是内置缓存的,
             //如果firstName 和 lastName 的值 没有发生改变,
             //函数就不会被再次执行, 就不会再次打印log中的内容
